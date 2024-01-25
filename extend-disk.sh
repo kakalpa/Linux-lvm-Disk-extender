@@ -39,10 +39,10 @@ fi
 # Determine the partition number
 if [ -n "$lvm" ]; then
   vgdevice=$(pvs | grep "$device" | awk '{print $2}' | xargs)
-  partition_number=${pvdevice/$device/}
+  read -r -p "Enter the partition number for $device: " partition_number
 else
   last_partition=$(fdisk -l 2> /dev/null | grep "^$device" | awk '{print $1}' | tail -n 1)
-  partition_number=${last_partition/$device/}
+  read -r -p "Enter the partition number for $device: " partition_number
 fi
 
 # Confirm user's intention
