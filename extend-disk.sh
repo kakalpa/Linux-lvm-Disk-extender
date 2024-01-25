@@ -30,6 +30,11 @@ device="$1"
 lvm=""
 partition_type="E6D6D379-F507-44C2-A23C-238F2A3DF928"
 
+# Function to get disk size
+get_disk_size() {
+  df -hT "$1" | awk 'NR==2 {print $3}'
+}
+
 # Determine if LVM is in use
 pvdevice=$(pvs | grep "$device" | awk '{print $1}' | xargs)
 if [ -n "$pvdevice" ]; then
@@ -47,6 +52,9 @@ fi
 
 # Confirm user's intention
 confirm "This script will extend the disk partition on $device. Do you want to proceed?"
+
+# Get the previous disk size
+prev_disk_size=$(get_disk_size "$device")
 
 # Resize the disk partition
 log "Resizing disk partition..."
@@ -88,4 +96,11 @@ case "$(df -Th "$filesystem_path" | tail -1 | awk '{print $2}')" in
     ;;
 esac
 
+# Get the new disk size
+new_disk_size=$(get_disk_size "$device")
+
+# Log final information
+log "Disk partition on $device resized."
+log "Previous Disk Size: $prev_disk_size"
+log "New Disk Size: $new_disk_size"
 log "File system resize is finished!"
