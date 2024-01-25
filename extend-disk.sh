@@ -1,6 +1,4 @@
 #!/bin/bash
-# This script will increse the size of the LVM disk partition so that you can take advantage of additional space after increasing the virtual
-# disk size either through virtualbox, openstack, or some other virtualization tool
 
 if [ -z "$1" ] ; then
   echo "You must specify the disk device being extended, eg: /dev/sda or /dev/vda";

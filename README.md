@@ -1,5 +1,5 @@
 # LVM Disk Partition Extension Script
-This Bash script is designed to facilitate the extension of LVM (Logical Volume Manager) disk partitions, allowing users to make use of additional space after increasing the virtual disk size through virtualization tools like VirtualBox, OpenStack, or others.
+This Bash script is designed to facilitate the extension of LVM (Logical Volume Manager) disk partitions, allowing users to make use of additional space after increasing the virtual disk size through virtualization tools like VirtualBox, OpenStack, Proxmox or others.
 
 ## Usage
 To use this script, follow the example below:
